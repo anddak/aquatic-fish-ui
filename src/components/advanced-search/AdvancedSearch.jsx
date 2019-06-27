@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, Button } from 'antd';
+import SearchForm from "./search-form/SearchForm";
 
 class AdvancedSearch extends React.Component {
 
@@ -46,9 +47,7 @@ class AdvancedSearch extends React.Component {
             </Button>,
           ]}
         >
-
-          
-
+          <SearchForm/>
         </Modal>
       </div>
     );
