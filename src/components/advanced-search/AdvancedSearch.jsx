@@ -1,57 +1,45 @@
+import Modal from 'react-bootstrap4-modal';
 import React from 'react';
-import { Modal, Button } from 'antd';
-import SearchForm from "./search-form/SearchForm";
 
 class AdvancedSearch extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
-  state = {
-    loading: false,
-    visible: false,
-  };
+    this.state = {
+      show: false,
+    };
 
-  showModal = () => {
-    this.setState({
-      visible: true,
-    });
-  };
+    this.handleShow = () => {
+      this.setState({ show: true });
+    };
 
-  handleOk = () => {
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false, visible: false });
-    }, 3000);
-  };
+    this.handleHide = () => {
+      this.setState({ show: false });
+    };
 
-  handleCancel = () => {
-    this.setState({ visible: false });
-  };
+}
 
   render() {
-    const { visible, loading } = this.state;
     return (
-      <div>
-        <Button type="primary" onClick={this.showModal}>
-          Open Modal with customized footer
-        </Button>
-        <Modal
-          visible={visible}
-          title="Title"
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-          footer={[
-            <Button key="back" onClick={this.handleCancel}>
-              Return
-            </Button>,
-            <Button key="submit" type="primary" loading={loading} onClick={this.handleOk}>
-              Submit
-            </Button>,
-          ]}
-        >
-          <SearchForm/>
-        </Modal>
-      </div>
+      <Modal visible={true} onClickBackdrop={this.modalBackdropClicked}>
+        <div className="modal-header">
+          <h5 className="modal-title">Red Alert!</h5>
+        </div>
+        <div className="modal-body">
+          <p>Enemy vessel approaching!</p>
+        </div>
+        <div className="modal-footer">
+          <button type="button" className="btn btn-secondary" onClick={this.onPanic}>
+            Panic
+          </button>
+          <button type="button" className="btn btn-primary" onClick={this.onFirePhasers}>
+            Fire phasers
+          </button>
+        </div>
+      </Modal>
     );
   }
+
 }
 
 export default AdvancedSearch;
