@@ -1,5 +1,6 @@
 import React from 'react';
-import {Input, InputNumber, Form, Button} from 'antd';
+import {Input, InputNumber, Form, Button, Row, Col} from 'antd';
+import './SearchForm.css';
 
 class SearchForm extends React.Component {
 
@@ -30,67 +31,70 @@ class SearchForm extends React.Component {
     const {handleChange} = this;
     return (
       <div>
-        <Form onSubmit={this.handleSearch}>
-          <Form.Item label="adultSize">
-            <Input
+        <Form layout="inline"
+          className="ant-advanced-search-form"
+          onSubmit={this.handleSearch}>
+          <Row gutter={24}>
+          <Form.Item label="Adult Size (cm)">
+            <InputNumber
               className="adultSize"
               name="adultSize"
               defaultValue={0}
-              onChange={handleChange}
+              onChange={handleChange('adultSize')}
            />
           </Form.Item>
-          <Form.Item label="minTemp">
-            <Input
+
+          {/* temperature */}
+          <Form.Item label="Water temperature °C">
+            <InputNumber
               className="minTemp"
               name="minTemp"
               defaultValue={0}
-              onChange={handleChange}/>
+              onChange={handleChange('minTemp')}/>
           </Form.Item>
-          <Form.Item label="maxTemp">
-            <Input
+          <Form.Item>
+            <InputNumber
               className="maxTemp"
               name="maxTemp"
               defaultValue={0}
-              onChange={handleChange}/>
+              onChange={handleChange('maxTemp')}/>
           </Form.Item>
-          <Form.Item label="minPh">
-            <Input
+            {/* --- end of temperature */}
+
+            {/*-- pH -- */}
+          <Form.Item label="pH Range">
+            <InputNumber
               className="minPh"
               name="minPh"
               defaultValue={0}
-              onChange={handleChange}/>
+              onChange={handleChange('minPh')}/>
           </Form.Item>
-          <Form.Item label="maxPh">
-            <Input
+          <Form.Item>
+            <InputNumber
               className="maxPh"
               name="maxPh"
               defaultValue={0}
-              onChange={handleChange}/>
+              onChange={handleChange('maxPh')}/>
           </Form.Item>
-          <Form.Item label="minWaterHardness">
-            <Input
+            {/*-- end of pH -- */}
+
+            {/*--Water Hardness -- */}
+          <Form.Item label="Water Hardness">
+            <InputNumber
               className="minWaterHardness"
               name="minWaterHardness"
               defaultValue={0}
-              onChange={handleChange}/>
+              onChange={handleChange('minWaterHardness')}/>
           </Form.Item>
-          <Form.Item label="maxWaterHardness">
-            <Input
+          <Form.Item>
+            <InputNumber
               className="maxWaterHardness"
               name="maxWaterHardness"
               defaultValue={0}
-              onChange={handleChange}/>
+              onChange={handleChange('maxWaterHardness')}/>
           </Form.Item>
-          <Form.Item label="testing">
-            <InputNumber
-              className="testing"
-              defaultValue={0}
-              onChange={handleChange('testing')}
-              />
-          </Form.Item>
-          <Button type="primary" htmlType="submit">
-            Search
-          </Button>
+            {/*-- end of water hardness -- */}
+          </Row>
         </Form>
 
       </div>
@@ -98,7 +102,7 @@ class SearchForm extends React.Component {
   }
 }
 
-//TODO: solution working, look at "testing" input and convert the rest as that
+//look for another solution for advanced search
 
 export default SearchForm;
 

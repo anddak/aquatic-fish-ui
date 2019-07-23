@@ -1,5 +1,5 @@
 import React from 'react';
-import {PageHeader, Table, Input, Button, Icon} from "antd";
+import { Table, Input, Button, Icon, InputNumber, Col, Row, Slider } from "antd";
 import './MainTable.css';
 
 const fishStub = [
@@ -12,8 +12,8 @@ const fishStub = [
     diet: "sds",
     temperament: "sd",
     levelPreference: "sdd",
-    adultSize: "2",
-    minTemp: "1",
+    adultSize: "4",
+    minTemp: "2",
     maxTemp: "20",
     minPh: "4",
     maxPh: "15",
@@ -31,7 +31,7 @@ const fishStub = [
     temperament: "sd",
     levelPreference: "sdd",
     adultSize: "2",
-    minTemp: "1",
+    minTemp: "7",
     maxTemp: "20",
     minPh: "4",
     maxPh: "15",
@@ -49,7 +49,7 @@ const fishStub = [
     temperament: "sd",
     levelPreference: "sdd",
     adultSize: "2",
-    minTemp: "1",
+    minTemp: "9",
     maxTemp: "20",
     minPh: "4",
     maxPh: "15",
@@ -60,71 +60,161 @@ const fishStub = [
 ];
 
 
-class MainTable extends React.Component {
+  class MainTable extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
+    state = {
       searchText: '',
-    }
-  }
+      adultSizeLo: 1,
+      adultSizeHi: 100,
+      minTempLo: 1,
+      minTempHi: 35,
+      maxTempLo: 1,
+      maxTempHi: 35,
+      minPhLo: 1,
+      minPhHi: 10,
+      maxPhLo: 1,
+      maxPhHi: 10,
+      minWaterHardnessLo: 1,
+      minWaterHardnessHi: 500,
+      maxWaterHardnessLo: 1,
+      maxWaterHardnessHi: 500,
+    };
 
-  getColumnSearchProps = dataIndex => ({
-    filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
-      <div style={{padding: 8}}>
-        <Input
-          ref={node => {
-            this.searchInput = node;
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => this.handleSearch(selectedKeys, confirm)}
-          style={{width: 188, marginBottom: 8, display: 'block'}}
+    getColumnFilterProps = dataIndex => ({
+      filterDropdown: ({ setSelectedKeys, selectedKeys, confirm }) => (
+        <div style={{ padding: 8 }}>
+          <Row
+            type="flex"
+            gutter={10}
+            style={{ marginBottom: 8, alignItems: 'center' }}
+          >
+            <Col>Range:</Col>
+            <Col>
+              <InputNumber
+                value={this.state[`${dataIndex}Lo`]}
+                onChange={e => {
+                  this.setState({ [`${dataIndex}Lo`]: e });
+                  setSelectedKeys(fishStub.filter(d => e <= d[dataIndex]).map(d => d.fish));
+                }}
+              />
+            </Col>
+            <Col>
+              <InputNumber
+                value={this.state[`${dataIndex}Hi`]}
+                onChange={e => {
+                  this.setState({ [`${dataIndex}Hi`]: e });
+                  setSelectedKeys(fishStub.filter(d => d[dataIndex] <= e).map(d => d.fish));
+                }}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Slider
+              range
+              value={[this.state[`${dataIndex}Lo`], this.state[`${dataIndex}Hi`]]}
+              onChange={e => this.setState({ [`${dataIndex}Lo`]: e[0], [`${dataIndex}Hi`]: e[1] })}
+            />
+          </Row>
+          <Row>
+            <Button
+              type="primary"
+              block
+              size="small"
+              onClick={() => {
+                this.handleFilter(selectedKeys, confirm);
+                setSelectedKeys(
+                  fishStub
+                    .filter(
+                      d => this.state[`${dataIndex}Lo`] <= d[dataIndex] && d[dataIndex] <= this.state[`${dataIndex}Hi`]
+                    )
+                    .map(d => d.fish)
+                );
+              }}
+            >
+              Confirm
+            </Button>
+          </Row>
+        </div>
+      ),
+      filterIcon: filtered => (
+        <Icon
+          type="sliders"
+          style={{ color: filtered ? '#1890ff' : undefined }}
         />
-        <Button
-          type="primary"
-          onClick={() => this.handleSearch(selectedKeys, confirm)}
-          icon="search"
-          size="small"
-          style={{width: 90, marginRight: 8}}
-        >
-          Search
-        </Button>
-        <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{width: 90}}>
-          Reset
-        </Button>
-      </div>
-    ),
-    filterIcon: filtered => (
-      <Icon type="search" style={{color: filtered ? '#1890ff' : undefined}}/>
-    ),
-    onFilter: (value, record) =>
-      record[dataIndex]
-        .toString()
-        .toLowerCase()
-        .includes(value.toLowerCase()),
-    onFilterDropdownVisibleChange: visible => {
-      if (visible) {
-        setTimeout(() => this.searchInput.select());
-      }
-    },
-  });
+      ),
+      onFilter: (value, record) =>
+        this.state[`${dataIndex}Lo`] <= record[dataIndex] && record[dataIndex] <= this.state[`${dataIndex}Hi`],
+    });
 
-  handleSearch = (selectedKeys, confirm) => {
-    confirm();
-    this.setState({searchText: selectedKeys[0]});
-  };
+    getColumnSearchProps = dataIndex => ({
+      filterDropdown: ({
+                         setSelectedKeys,
+                         selectedKeys,
+                         confirm,
+                         clearFilters
+                       }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            ref={node => {
+              this.searchInput = node;
+            }}
+            placeholder={`Search ${dataIndex}`}
+            value={selectedKeys[0]}
+            onChange={e =>
+              setSelectedKeys(e.target.value ? [e.target.value] : [])
+            }
+            onPressEnter={() => this.handleSearch(selectedKeys, confirm)}
+            style={{ width: 188, marginBottom: 8, display: 'block' }}
+          />
+          <Button
+            type="primary"
+            onClick={() => this.handleSearch(selectedKeys, confirm)}
+            icon="search"
+            size="small"
+            style={{ width: 90, marginRight: 8 }}
+          >
+            Search
+          </Button>
+          <Button
+            onClick={() => this.handleReset(clearFilters)}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Reset
+          </Button>
+        </div>
+      ),
+      filterIcon: filtered => (
+        <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+      ),
+      onFilter: (value, record) =>
+        record[dataIndex]
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase()),
+      onFilterDropdownVisibleChange: visible => {
+        if (visible) {
+          setTimeout(() => this.searchInput.select());
+        }
+      },
+    });
 
-  handleReset = clearFilters => {
-    clearFilters();
-    this.setState({searchText: ''});
-  };
+    handleFilter = (selectedKeys, confirm) => {
+      confirm();
+    };
 
+    handleSearch = (selectedKeys, confirm) => {
+      confirm();
+      this.setState({ searchText: selectedKeys[0] });
+    };
 
-  render() {
+    handleReset = clearFilters => {
+      clearFilters();
+      this.setState({ searchText: '' });
+    };
 
-    const transactionColumns = [
+    render() {
+    const columns = [
       {
         title: 'Fish',
         dataIndex: 'fish',
@@ -165,52 +255,54 @@ class MainTable extends React.Component {
         dataIndex: 'adultSize',
         key: 'adultSize',
         sorter: (a, b) => a.adultSize.localeCompare(b.adultSize),
+        ...this.getColumnFilterProps('adultSize')
       },
       {
         title: 'Min °C',
         dataIndex: 'minTemp',
         key: 'minTemp',
         sorter: (a, b) => a.minTemp - b.minTemp,
+        ...this.getColumnFilterProps('minTemp'),
       },
       {
         title: 'Max °C',
         dataIndex: 'maxTemp',
         key: 'maxTemp',
         sorter: (a, b) => a.maxTemp - b.maxTemp,
+        ...this.getColumnFilterProps('maxTemp'),
       },
       {
         title: 'Min pH',
         dataIndex: 'minPh',
         key: 'minPh',
         sorter: (a, b) => a.minPh - b.minPh,
+        ...this.getColumnFilterProps('minPh'),
       },
       {
         title: 'Max pH',
         dataIndex: 'maxPh',
         key: 'maxPh',
         sorter: (a, b) => a.maxPh - b.maxPh,
+        ...this.getColumnFilterProps('maxPh'),
       },
       {
         title: 'Min Water Hardness',
         dataIndex: 'minWaterHardness',
         key: 'minWaterHardness',
         sorter: (a, b) => a.minWaterHardness - b.minWaterHardness,
+        ...this.getColumnFilterProps('minWaterHardness'),
       },
       {
         title: 'Max Water Hardness',
         dataIndex: 'maxWaterHardness',
         key: 'maxWaterHardness',
         sorter: (a, b) => a.maxWaterHardness - b.maxWaterHardness,
+        ...this.getColumnFilterProps('maxWaterHardness'),
       },
+      ];
+      return <Table columns={columns} dataSource={fishStub} />;
+    }
 
-    ];
-
-    return(
-      <div>
-        <Table dataSource={fishStub} columns={transactionColumns}/>
-      </div>
-    );
   }
-}
 
 export default MainTable;
