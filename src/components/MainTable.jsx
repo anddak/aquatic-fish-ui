@@ -1,6 +1,11 @@
 import React from 'react';
-import { Table, Input, Button, Icon, InputNumber, Col, Row, Slider } from "antd";
+import { Table, Input, Button, Icon, InputNumber, Col, Row, Slider, Drawer } from "antd";
 import './MainTable.css';
+import { connect } from "react-redux";
+import FishDetailsDrawer from "./FishDetailsDrawer";
+import {changeDrawerVisibility} from "../js/redux/actions";
+
+
 
 const fishStub = [
   {
@@ -78,6 +83,7 @@ const fishStub = [
       minWaterHardnessHi: 500,
       maxWaterHardnessLo: 1,
       maxWaterHardnessHi: 500,
+      selectedFish: "",
     };
 
     getColumnFilterProps = dataIndex => ({
@@ -192,11 +198,6 @@ const fishStub = [
           .toString()
           .toLowerCase()
           .includes(value.toLowerCase()),
-      onFilterDropdownVisibleChange: visible => {
-        if (visible) {
-          setTimeout(() => this.searchInput.select());
-        }
-      },
     });
 
     handleFilter = (selectedKeys, confirm) => {
@@ -213,6 +214,7 @@ const fishStub = [
       this.setState({ searchText: '' });
     };
 
+
     render() {
     const columns = [
       {
@@ -221,6 +223,7 @@ const fishStub = [
         key: 'fish',
         ...this.getColumnSearchProps('fish'),
         sorter: (a, b) => a.fish.localeCompare(b.fish),
+        render: text => <a onClick={this.props.changeDrawerVisibility}>{text}</a>,
       },
       {
         title: 'Family',
@@ -300,9 +303,19 @@ const fishStub = [
         ...this.getColumnFilterProps('maxWaterHardness'),
       },
       ];
-      return <Table columns={columns} dataSource={fishStub} />;
+      return (
+        <div>
+          <Table columns={columns} dataSource={fishStub}/>
+          <FishDetailsDrawer />
+        </div>
+    )
     }
-
   }
 
-export default MainTable;
+const mapDispatchToProps = dispatch => ({
+  changeDrawerVisibility: () => dispatch(changeDrawerVisibility(true))
+});
+
+export default connect(null, mapDispatchToProps)(MainTable);
+
+//TODO: redux works with drawer, next up - customise drawer
