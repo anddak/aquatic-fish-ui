@@ -5,11 +5,12 @@ import { connect } from "react-redux";
 import { changeDrawerVisibility } from "../../src/js/redux/actions/index";
 
 
-function FishDetailsDrawer ({visible, changeDrawerVisibility}) {
+function FishDetailsDrawer ({visible, changeDrawerVisibility, fishName}) {
 
     return (
       <Drawer
-        title="Basic Drawer"
+        width={640}
+        title={fishName}
         placement="right"
         closable={false}
         onClose={changeDrawerVisibility}

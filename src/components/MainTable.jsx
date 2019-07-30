@@ -67,6 +67,11 @@ const fishStub = [
 
   class MainTable extends React.Component {
 
+    constructor(props) {
+      super(props);
+      this.handleClick = this.handleClick.bind(this);
+    }
+
     state = {
       searchText: '',
       adultSizeLo: 1,
@@ -214,6 +219,11 @@ const fishStub = [
       this.setState({ searchText: '' });
     };
 
+    handleClick(fish) {
+      this.props.changeDrawerVisibility();
+      this.setState({ selectedFish: fish});
+    }
+
 
     render() {
     const columns = [
@@ -223,7 +233,7 @@ const fishStub = [
         key: 'fish',
         ...this.getColumnSearchProps('fish'),
         sorter: (a, b) => a.fish.localeCompare(b.fish),
-        render: text => <a onClick={this.props.changeDrawerVisibility}>{text}</a>,
+        render: text => <a onClick={() => this.handleClick(text)}>{text}</a>,
       },
       {
         title: 'Family',
@@ -306,7 +316,7 @@ const fishStub = [
       return (
         <div>
           <Table columns={columns} dataSource={fishStub}/>
-          <FishDetailsDrawer />
+          <FishDetailsDrawer fishName={this.state.selectedFish} />
         </div>
     )
     }
@@ -316,6 +326,7 @@ const mapDispatchToProps = dispatch => ({
   changeDrawerVisibility: () => dispatch(changeDrawerVisibility(true))
 });
 
+
 export default connect(null, mapDispatchToProps)(MainTable);
 
-//TODO: redux works with drawer, next up - customise drawer
+//TODO: carry on with drawer design as per the notebook; fetch the fish in FishDetailsDrawer, based on name passed, then pass in the props to the separate sections
