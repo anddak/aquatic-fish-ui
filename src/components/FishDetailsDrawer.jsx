@@ -1,8 +1,9 @@
 import React from 'react';
-import {  Drawer } from "antd";
+import {  Drawer, Row, Col } from "antd";
 import './FishDetailsDrawer.css';
 import { connect } from "react-redux";
 import { changeDrawerVisibility } from "../../src/js/redux/actions/index";
+import {fishImages} from '../js/utils/image-mapper';
 
 
 function FishDetailsDrawer ({visible, changeDrawerVisibility, fishName}) {
@@ -16,9 +17,12 @@ function FishDetailsDrawer ({visible, changeDrawerVisibility, fishName}) {
         onClose={changeDrawerVisibility}
         visible={visible}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+          <Row type="flex">
+              <Col span={12}>Column 1</Col>
+              <Col span={12}>
+                  <img src={fishImages[fishName]} alt={fishName} height="256" width={"256"}/>
+              </Col>
+          </Row>
       </Drawer>
 
     )
