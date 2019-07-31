@@ -1,6 +1,6 @@
 import {Col, Divider, Drawer, Row} from "antd";
 import {DescriptionItem} from "../DescriptionItem";
-import './DrawerSectionSpecification.css';
+import './DrawerSection.css';
 import {fishImages} from "../../../js/utils/image-mapper";
 
 import React from "react";
