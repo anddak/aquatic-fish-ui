@@ -1,6 +1,11 @@
 import React from 'react';
-import { Table, Input, Button, Icon, InputNumber, Col, Row, Slider } from "antd";
+import { Table, Input, Button, Icon, InputNumber, Col, Row, Slider, Drawer } from "antd";
 import './MainTable.css';
+import { connect } from "react-redux";
+import FishDetailsDrawer from "./FishDetailsDrawer";
+import {changeDrawerVisibility} from "../js/redux/actions";
+
+
 
 const fishStub = [
   {
@@ -62,6 +67,11 @@ const fishStub = [
 
   class MainTable extends React.Component {
 
+    constructor(props) {
+      super(props);
+      this.handleClick = this.handleClick.bind(this);
+    }
+
     state = {
       searchText: '',
       adultSizeLo: 1,
@@ -78,6 +88,7 @@ const fishStub = [
       minWaterHardnessHi: 500,
       maxWaterHardnessLo: 1,
       maxWaterHardnessHi: 500,
+      selectedFish: "",
     };
 
     getColumnFilterProps = dataIndex => ({
@@ -192,11 +203,6 @@ const fishStub = [
           .toString()
           .toLowerCase()
           .includes(value.toLowerCase()),
-      onFilterDropdownVisibleChange: visible => {
-        if (visible) {
-          setTimeout(() => this.searchInput.select());
-        }
-      },
     });
 
     handleFilter = (selectedKeys, confirm) => {
@@ -213,6 +219,12 @@ const fishStub = [
       this.setState({ searchText: '' });
     };
 
+    handleClick(fish) {
+      this.props.changeDrawerVisibility();
+      this.setState({ selectedFish: fish});
+    }
+
+
     render() {
     const columns = [
       {
@@ -221,6 +233,7 @@ const fishStub = [
         key: 'fish',
         ...this.getColumnSearchProps('fish'),
         sorter: (a, b) => a.fish.localeCompare(b.fish),
+        render: text => <a onClick={() => this.handleClick(text)}>{text}</a>,
       },
       {
         title: 'Family',
@@ -300,9 +313,20 @@ const fishStub = [
         ...this.getColumnFilterProps('maxWaterHardness'),
       },
       ];
-      return <Table columns={columns} dataSource={fishStub} />;
+      return (
+        <div>
+          <Table columns={columns} dataSource={fishStub}/>
+          <FishDetailsDrawer fishName={this.state.selectedFish} />
+        </div>
+    )
     }
-
   }
 
-export default MainTable;
+const mapDispatchToProps = dispatch => ({
+  changeDrawerVisibility: () => dispatch(changeDrawerVisibility(true))
+});
+
+
+export default connect(null, mapDispatchToProps)(MainTable);
+
+//TODO: carry on with drawer design as per the notebook; fetch the fish in FishDetailsDrawer, based on name passed, then pass in the props to the separate sections
