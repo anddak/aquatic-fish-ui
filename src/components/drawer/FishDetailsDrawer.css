@@ -1,1 +1,10 @@
-@import '~antd/dist/antd.css';
+@import '../../../node_modules/antd/dist/antd.css';
+
+.drawer-title {
+    font-size: 18px;
+    color: rgba(0,0,0,0.85);
+    line-height: 24px;
+    display: block;
+    margin-bottom: 24px;
+    font-weight: 400;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Input, Button, Icon, InputNumber, Col, Row, Slider, Drawer } from "antd";
 import './MainTable.css';
 import { connect } from "react-redux";
-import FishDetailsDrawer from "./FishDetailsDrawer";
+import FishDetailsDrawer from "./drawer/FishDetailsDrawer";
 import {changeDrawerVisibility} from "../js/redux/actions";
 
 
