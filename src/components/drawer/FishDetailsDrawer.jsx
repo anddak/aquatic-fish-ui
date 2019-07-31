@@ -18,9 +18,10 @@ function FishDetailsDrawer ({visible, changeDrawerVisibility, fishName}) {
         visible={visible}
       >
           <Row type="flex">
-              <Col span={12}>Column 1</Col>
               <Col span={12}>
-                  <img src={fishImages[fishName]} alt={fishName} height="256" width={"256"}/>
+              </Col>
+              <Col span={12}>
+                  <img src={fishImages[fishName]} alt={fishName} height="256" width="256"/>
               </Col>
           </Row>
       </Drawer>
