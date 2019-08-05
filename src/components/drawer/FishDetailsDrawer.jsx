@@ -3,15 +3,17 @@ import {  Drawer, Row, Divider } from "antd";
 import './FishDetailsDrawer.css';
 import { connect } from "react-redux";
 import { changeDrawerVisibility } from "../../js/redux/actions/index";
-import {DrawerSectionSpecification} from "./drawer-section/DrawerSectionSpecification";
+import {DrawerSectionClassification} from "./drawer-section/DrawerSectionClassification";
 import {DrawerSectionDescription} from "./drawer-section/DrawerSectionDescription";
+import { Typography } from 'antd';
+import DrawerSelectionOrigin from "./drawer-section/DrawerSelectionOrigin";
+
+const { Text } = Typography;
 
 
-function FishDetailsDrawer ({visible, changeDrawerVisibility, fishName}) {
+function FishDetailsDrawer ({visible, changeDrawerVisibility, selectedFish}) {
 
-  //TODO: fetch here, then pass down the required details to the corresponding drawer sections
-  const stubDescription = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
-
+    console.log(selectedFish);
     return (
       <Drawer
         width={640}
@@ -21,12 +23,17 @@ function FishDetailsDrawer ({visible, changeDrawerVisibility, fishName}) {
         visible={visible}
       >
           <Row type="flex">
-              <p className="drawer-title">{fishName}</p>
+              <p className="drawer-title">{selectedFish.fish}</p>
           </Row>
-          <DrawerSectionSpecification fishName={fishName}/>
+          <Row>
+              <Text type="secondary">{selectedFish.family}</Text>
+          </Row>
           <Divider />
-          <DrawerSectionDescription description={stubDescription}/>
+          <DrawerSectionClassification selectedFish={selectedFish}/>
           <Divider />
+          <DrawerSectionDescription description={selectedFish.description}/>
+          <Divider />
+          {/*<DrawerSelectionOrigin origin={selectedFish.origin} />*/}
       </Drawer>
 
     )

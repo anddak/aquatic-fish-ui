@@ -1,6 +1,7 @@
 import {Row} from "antd";
 import React from "react";
 import { Typography } from 'antd';
+import './DrawerSection.css';
 
 const { Paragraph } = Typography;
 

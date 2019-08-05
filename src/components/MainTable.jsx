@@ -25,6 +25,9 @@ const fishStub = [
     minWaterHardness: "50",
     maxWaterHardness: "100",
     tempReference: "sd",
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    isLiveBreeder: true,
+    mainGroup: "main group"
   },
   {
     fish: "Siamese Fighting Fish",
@@ -43,6 +46,9 @@ const fishStub = [
     minWaterHardness: "50",
     maxWaterHardness: "100",
     tempReference: "sd",
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    isLiveBreeder: false,
+    mainGroup: "main group"
   },
   {
     fish: "Platty",
@@ -61,6 +67,9 @@ const fishStub = [
     minWaterHardness: "50",
     maxWaterHardness: "100",
     tempReference: "sd",
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    isLiveBreeder: true,
+    mainGroup: "main group"
   },
 ];
 
@@ -90,6 +99,7 @@ const fishStub = [
       maxWaterHardnessHi: 500,
       selectedFish: "",
     };
+
 
     getColumnFilterProps = dataIndex => ({
       filterDropdown: ({ setSelectedKeys, selectedKeys, confirm }) => (
@@ -221,11 +231,13 @@ const fishStub = [
 
     handleClick(fish) {
       this.props.changeDrawerVisibility();
-      this.setState({ selectedFish: fish});
+      const selectedFish = fishStub.find(x => x.fish === fish);
+      this.setState({ selectedFish: selectedFish });
     }
 
 
     render() {
+
     const columns = [
       {
         title: 'Fish',
@@ -316,7 +328,7 @@ const fishStub = [
       return (
         <div>
           <Table columns={columns} dataSource={fishStub}/>
-          <FishDetailsDrawer fishName={this.state.selectedFish} />
+          <FishDetailsDrawer selectedFish={this.state.selectedFish} />
         </div>
     )
     }
