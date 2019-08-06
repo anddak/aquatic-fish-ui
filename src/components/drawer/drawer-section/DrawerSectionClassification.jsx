@@ -1,4 +1,4 @@
-import {Col, Divider, Drawer, Row} from "antd";
+import {Col, Row} from "antd";
 import {DescriptionItem} from "../DescriptionItem";
 import './DrawerSection.css';
 import {fishImages} from "../../../js/utils/image-mapper";

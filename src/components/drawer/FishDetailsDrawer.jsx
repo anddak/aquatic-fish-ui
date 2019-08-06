@@ -2,10 +2,10 @@ import React from 'react';
 import {  Drawer, Row, Divider } from "antd";
 import './FishDetailsDrawer.css';
 import { connect } from "react-redux";
+import { Typography } from 'antd';
 import { changeDrawerVisibility } from "../../js/redux/actions/index";
 import {DrawerSectionClassification} from "./drawer-section/DrawerSectionClassification";
 import {DrawerSectionDescription} from "./drawer-section/DrawerSectionDescription";
-import { Typography } from 'antd';
 import DrawerSelectionOrigin from "./drawer-section/DrawerSelectionOrigin";
 
 const { Text } = Typography;
@@ -33,7 +33,7 @@ function FishDetailsDrawer ({visible, changeDrawerVisibility, selectedFish}) {
           <Divider />
           <DrawerSectionDescription description={selectedFish.description}/>
           <Divider />
-          {/*<DrawerSelectionOrigin origin={selectedFish.origin} />*/}
+          <DrawerSelectionOrigin origin={selectedFish.fish} />
       </Drawer>
 
     )

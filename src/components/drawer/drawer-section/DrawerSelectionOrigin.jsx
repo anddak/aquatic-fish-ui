@@ -1,37 +1,21 @@
-import React from 'react'
-import { Map as LeafletMap, GeoJSON, Marker, Popup } from 'react-leaflet';
-import worldGeoJSON from 'world-map-geojson';
+import {Col, Row} from "antd";
+import React from "react";
+import './DrawerSection.css';
+import {originMaps} from "../../../js/utils/image-mapper";
 
 
-export default function DrawerSelectionOrigin(origin) {
+export default function DrawerSelectionOrigin({origin}) {
 
-    // return (
-    //     <LeafletMap
-    //         center={[50, 10]}
-    //         zoom={6}
-    //         maxZoom={10}
-    //         attributionControl={true}
-    //         zoomControl={true}
-    //         doubleClickZoom={true}
-    //         scrollWheelZoom={true}
-    //         dragging={true}
-    //         animate={true}
-    //         easeLinearity={0.35}
-    //     >
-    //         <GeoJSON
-    //             data={worldGeoJSON}
-    //             style={() => ({
-    //                 color: '#4a83ec',
-    //                 weight: 0.5,
-    //                 fillColor: "#1a1d62",
-    //                 fillOpacity: 1,
-    //             })}
-    //         />
-    //         <Marker position={[50, 10]}>
-    //             <Popup>
-    //                 Popup for any custom information.
-    //             </Popup>
-    //         </Marker>
-    //     </LeafletMap>
-    // );
+    return (
+        <div>
+            <Row type="flex">
+                <Col span={12}>
+                    <p className="drawer-menu">Origin</p>
+                </Col>
+                <Col span={12}>
+                    <img src={originMaps[origin]} alt={origin} width="256"/>
+                </Col>
+            </Row>
+        </div>
+    )
 }

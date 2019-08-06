@@ -34,7 +34,7 @@ const fishStub = [
     family: "xyz",
     genus: "abc",
     species: "qwe",
-    origin: "scdsd",
+    origin: "siamese-origin",
     diet: "sds",
     temperament: "sd",
     levelPreference: "sdd",

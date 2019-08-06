@@ -8,3 +8,9 @@ export const fishImages = {
     "Zebra Danio": require('../../assets/fish-images/zebra-danio.png'),
 };
 
+export const originMaps = {
+
+    "Siamese Fighting Fish": require('../../assets/origin-maps/siamese-origin.png'),
+
+};
+
