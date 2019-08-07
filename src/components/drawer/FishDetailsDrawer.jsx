@@ -6,7 +6,7 @@ import { Typography } from 'antd';
 import { changeDrawerVisibility } from "../../js/redux/actions/index";
 import {DrawerSectionClassification} from "./drawer-section/DrawerSectionClassification";
 import {DrawerSectionDescription} from "./drawer-section/DrawerSectionDescription";
-import DrawerSelectionOrigin from "./drawer-section/DrawerSelectionOrigin";
+import DrawerSelectionHabitat from "./drawer-section/DrawerSelectionHabitat";
 
 const { Text } = Typography;
 
@@ -33,7 +33,7 @@ function FishDetailsDrawer ({visible, changeDrawerVisibility, selectedFish}) {
           <Divider />
           <DrawerSectionDescription description={selectedFish.description}/>
           <Divider />
-          <DrawerSelectionOrigin origin={selectedFish.fish} />
+          <DrawerSelectionHabitat fishName={selectedFish.fish} origin={selectedFish.origin} />
       </Drawer>
 
     )
