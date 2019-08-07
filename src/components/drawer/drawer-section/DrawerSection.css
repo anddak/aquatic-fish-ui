@@ -1,0 +1,10 @@
+@import '../../../../node_modules/antd/dist/antd.css';
+
+.drawer-menu {
+    font-size: 18px;
+    color: rgba(0,0,0,0.85);
+    line-height: 64px;
+    display: block;
+    margin-bottom: 16px;
+    font-weight: 400;
+}
