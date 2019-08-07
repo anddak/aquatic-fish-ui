@@ -1,5 +1,5 @@
 import {Col, Row} from "antd";
-import {DescriptionItem} from "../DescriptionItem";
+import {DescriptionItem} from "./DescriptionItem";
 import './DrawerSection.css';
 import {fishImages} from "../../../js/utils/image-mapper";
 
