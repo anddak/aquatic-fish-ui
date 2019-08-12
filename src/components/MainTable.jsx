@@ -35,9 +35,9 @@ const fishStub = [
     genus: "abc",
     species: "qwe",
     origin: ["Myanmar", "Laos", "Thailand", "Cambodia"],
-    diet: "sds",
-    temperament: "sd",
-    levelPreference: "sdd",
+    diet: "ex. carnivore",
+    temperament: "ex. friendly, territorial",
+    levelPreference: "ex. upper, mid-level, bottom",
     adultSize: "2",
     minTemp: "7",
     maxTemp: "20",
@@ -45,10 +45,10 @@ const fishStub = [
     maxPh: "15",
     minWaterHardness: "50",
     maxWaterHardness: "100",
-    tempReference: "sd",
+    tempReference: "cold, tropical",
     description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     isLiveBreeder: false,
-    mainGroup: "main group"
+    mainGroup: "marine, fresh water, pond"
   },
   {
     fish: "Discus",
@@ -340,5 +340,3 @@ const mapDispatchToProps = dispatch => ({
 
 
 export default connect(null, mapDispatchToProps)(MainTable);
-
-//TODO: carry on with drawer design as per the notebook; fetch the fish in FishDetailsDrawer, based on name passed, then pass in the props to the separate sections
