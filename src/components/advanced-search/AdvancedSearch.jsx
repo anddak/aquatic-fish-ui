@@ -39,18 +39,27 @@ class AdvancedSearch extends React.Component {
             maxPh: ""
         };
 
+        this.initialState = this.state;
         this.handleTextChange = this.handleTextChange.bind(this);
 
     };
 
     handleReset = () => {
         this.props.form.resetFields();
+        this.setState(this.initialState);
+        this.setState({expand: true});
     };
 
     handleToggle = () => {
         const {expand} = this.state;
         this.setState({expand: !expand});
     };
+
+    handleFormSubmit = e => {
+        // fetch an endpoint with the parameters of the state then return all values GET)
+    };
+
+
 
     /**
      * Handlers for all the <select> tags
@@ -82,7 +91,7 @@ class AdvancedSearch extends React.Component {
 
 
     render() {
-        const {handleReset, handleToggle, handleSelection, handleTextChange, handleNumericChange} = this;
+        const {handleReset, handleToggle, handleSelection, handleTextChange, handleNumericChange, handleFormSubmit} = this;
         const {expand} = this.state;
         const {getFieldDecorator} = this.props.form;
 
@@ -97,7 +106,7 @@ class AdvancedSearch extends React.Component {
 
         return (
             <div className="advanced-search-form">
-                <Form {...formItemLayout}>
+                <Form {...formItemLayout} onSubmit={handleFormSubmit}>
                     <Row gutter={48} style={{paddingTop: 20}}>
                         <Col offset={1} span={5} style={{display: "block"}}>
                             <Form.Item label="Fish" colon={false}>
@@ -351,7 +360,5 @@ class AdvancedSearch extends React.Component {
         )
     };
 }
-
-//TODO: next to update "Clear" button so it sets state back as well
 
 export const WrappedAdvancedSearch = Form.create({name: 'advanced_search'})(AdvancedSearch);

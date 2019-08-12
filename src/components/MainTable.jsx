@@ -340,5 +340,3 @@ const mapDispatchToProps = dispatch => ({
 
 
 export default connect(null, mapDispatchToProps)(MainTable);
-
-//TODO: carry on with drawer design as per the notebook; fetch the fish in FishDetailsDrawer, based on name passed, then pass in the props to the separate sections
