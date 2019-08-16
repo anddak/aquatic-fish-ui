@@ -1,8 +1,9 @@
 import React from 'react';
-import { Form, Row, Col, Button, Icon, Input, InputNumber, Select } from 'antd';
+import { Form, Row, Col, Button, Icon, Input, InputNumber, Select, Typography } from 'antd';
 import './AdvancedSearch.css';
 
 const { Option } = Select;
+const { Text } = Typography;
 
 /*
 Using class component because ant-design's Form requires ref's. Functional stateless components doesn't have ref's,
@@ -53,7 +54,7 @@ class AdvancedSearch extends React.Component {
     this.setState({ expand: !expand });
   };
 
-  handleFormSubmit = e => {
+  handleFormSubmit = () => {
     // fetch an endpoint with the parameters of the state then return all values GET)
   };
 
@@ -97,21 +98,13 @@ class AdvancedSearch extends React.Component {
     const { expand } = this.state;
     const { getFieldDecorator } = this.props.form;
 
-    const formItemLayout = {
-      labelCol: {
-        span: 9
-      },
-      wrapperCol: {
-        span: 15
-      }
-    };
-
     return (
       <div className="advanced-search-form">
-        <Form {...formItemLayout} onSubmit={handleFormSubmit}>
+        <Form onSubmit={handleFormSubmit}>
           <Row gutter={48} style={{ paddingTop: 20 }}>
-            <Col offset={1} span={5} style={{ display: 'block' }}>
-              <Form.Item label="Fish" colon={false}>
+            <Col offset={1} span={5}>
+              <Text className="search-label">Fish</Text>
+              <Form.Item>
                 {getFieldDecorator('fish')(
                   <Input
                     name="fish"
@@ -121,7 +114,7 @@ class AdvancedSearch extends React.Component {
                 )}
               </Form.Item>
             </Col>
-            <Col offset={18}>
+            <Col push={1} style={{marginTop: 25}}>
               <Button type="primary" htmlType="submit">
                 Search
               </Button>
@@ -142,7 +135,8 @@ class AdvancedSearch extends React.Component {
                   span={5}
                   style={{ display: 'block', marginRight: 20 }}
                 >
-                  <Form.Item label="Family" colon={false}>
+                  <Text className="label">Family</Text>
+                  <Form.Item>
                     {getFieldDecorator('family')(
                       <Input
                         name="family"
@@ -153,7 +147,8 @@ class AdvancedSearch extends React.Component {
                   </Form.Item>
                 </Col>
                 <Col span={5} style={{ display: 'block', marginRight: 20 }}>
-                  <Form.Item label="Genus" colon={false}>
+                  <Text className="label">Genus</Text>
+                  <Form.Item>
                     {getFieldDecorator('genus')(
                       <Input
                         name="genus"
@@ -164,7 +159,8 @@ class AdvancedSearch extends React.Component {
                   </Form.Item>
                 </Col>
                 <Col span={5} style={{ display: 'block' }}>
-                  <Form.Item label="Species" colon={false}>
+                  <Text className="label">Species</Text>
+                  <Form.Item>
                     {getFieldDecorator('species')(
                       <Input
                         name="species"
@@ -181,7 +177,8 @@ class AdvancedSearch extends React.Component {
                   span={5}
                   style={{ display: 'block', marginRight: 20 }}
                 >
-                  <Form.Item label="Group" colon={false}>
+                  <Text className="label">Group</Text>
+                  <Form.Item>
                     {getFieldDecorator('group', {
                       onChange: value => handleSelection('group', value)
                     })(
@@ -200,7 +197,8 @@ class AdvancedSearch extends React.Component {
                   </Form.Item>
                 </Col>
                 <Col span={5} style={{ display: 'block', marginRight: 20 }}>
-                  <Form.Item label="Temperature" colon={false}>
+                  <Text className="label">Temperature reference</Text>
+                  <Form.Item>
                     {getFieldDecorator('temperatureRef', {
                       onChange: value =>
                         handleSelection('temperatureRef', value)
@@ -217,7 +215,8 @@ class AdvancedSearch extends React.Component {
                   </Form.Item>
                 </Col>
                 <Col span={5} style={{ display: 'block' }}>
-                  <Form.Item label="Breeding" colon={false}>
+                  <Text className="label">Breeding</Text>
+                  <Form.Item>
                     {getFieldDecorator('breeding', {
                       onChange: value => handleSelection('breeding', value)
                     })(
@@ -239,7 +238,8 @@ class AdvancedSearch extends React.Component {
                   span={5}
                   style={{ display: 'block', marginRight: 20 }}
                 >
-                  <Form.Item label="Diet" colon={false}>
+                  <Text className="label">Diet</Text>
+                  <Form.Item>
                     {getFieldDecorator('diet', {
                       onChange: value => handleSelection('diet', value)
                     })(
@@ -255,7 +255,8 @@ class AdvancedSearch extends React.Component {
                   </Form.Item>
                 </Col>
                 <Col span={5} style={{ display: 'block', marginRight: 20 }}>
-                  <Form.Item label="Temperament" colon={false}>
+                  <Text className="label">Temperament</Text>
+                  <Form.Item>
                     {getFieldDecorator('temperament', {
                       onChange: value => handleSelection('temperament', value)
                     })(
@@ -274,7 +275,8 @@ class AdvancedSearch extends React.Component {
                   </Form.Item>
                 </Col>
                 <Col span={5} style={{ display: 'block', marginRight: 20 }}>
-                  <Form.Item label="Swim Level" colon={false}>
+                  <Text className="label">Swim Level</Text>
+                  <Form.Item>
                     {getFieldDecorator('swimLevel', {
                       onChange: value => handleSelection('swimLevel', value)
                     })(
@@ -293,7 +295,8 @@ class AdvancedSearch extends React.Component {
                   </Form.Item>
                 </Col>
                 <Col span={5} style={{ display: 'block' }}>
-                  <Form.Item label="Habitat" colon={false}>
+                  <Text className="label">Habitat</Text>
+                  <Form.Item>
                     {getFieldDecorator('habitat', {
                       onChange: value => handleSelection('habitat', value)
                     })(
@@ -312,7 +315,8 @@ class AdvancedSearch extends React.Component {
                   span={5}
                   style={{ display: 'block', marginRight: 20 }}
                 >
-                  <Form.Item label="Adult Size" colon={false}>
+                  <Text className="label">Adult Size</Text>
+                  <Form.Item>
                     {getFieldDecorator('adultSize', {
                       initialValue: 1,
                       onChange: value => handleNumericChange('adultSize', value)
@@ -326,13 +330,14 @@ class AdvancedSearch extends React.Component {
                   </Form.Item>
                 </Col>
                 <Col span={5} style={{ display: 'block', marginRight: 20 }}>
-                  <Form.Item label="Min/Max temp." colon={false}>
+                  <Text className="label">Min/Max Temp</Text>
+                  <Form.Item>
                     {getFieldDecorator('minTemp', {
                       initialValue: 20,
                       onChange: value => handleNumericChange('minTemp', value)
                     })(
                       <InputNumber
-                        style={{ marginRight: 8 }}
+                        style={{ marginRight: 5 }}
                         min={1}
                         formatter={value => `${value} °C`}
                         parser={value => value.replace(' °C', '')}
@@ -351,14 +356,15 @@ class AdvancedSearch extends React.Component {
                   </Form.Item>
                 </Col>
                 <Col span={5} style={{ display: 'block', marginRight: 20 }}>
-                  <Form.Item label="Water Hardness" colon={false}>
+                  <Text className="label">Water Hardness</Text>
+                  <Form.Item>
                     {getFieldDecorator('minHardness', {
                       initialValue: 10,
                       onChange: value =>
                         handleNumericChange('minHardness', value)
                     })(
                       <InputNumber
-                        style={{ marginRight: 8 }}
+                        style={{ marginRight: 5 }}
                         min={1}
                         formatter={value => `${value} dH`}
                         parser={value => value.replace(' °dH', '')}
@@ -379,11 +385,12 @@ class AdvancedSearch extends React.Component {
                   </Form.Item>
                 </Col>
                 <Col span={5} style={{ display: 'block' }}>
-                  <Form.Item label="pH Levels" colon={false}>
+                  <Text className="label">pH Levels</Text>
+                  <Form.Item>
                     {getFieldDecorator('minPh', {
                       initialValue: 1,
                       onChange: value => handleNumericChange('minPh', value)
-                    })(<InputNumber style={{ marginRight: 8 }} min={1} />)}
+                    })(<InputNumber style={{ marginRight: 5 }} min={1} />)}
                     {getFieldDecorator('maxPh', {
                       initialValue: 10,
                       onChange: value => handleNumericChange('maxPh', value)
