@@ -1,12 +1,10 @@
 import React from 'react';
-import MainTable from "./components/MainTable";
-import {WrappedAdvancedSearch} from "./components/advanced-search/AdvancedSearch"
+import Skeleton from "./components/Skeleton";
 
 function App() {
   return (
     <div className="App">
-      <WrappedAdvancedSearch />
-      <MainTable/>
+      <Skeleton />
     </div>
   );
 }

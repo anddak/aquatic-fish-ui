@@ -109,7 +109,7 @@ class MainTable extends React.Component {
   };
 
   getColumnFilterProps = dataIndex => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm }) => (
+    filterDropdown: ({setSelectedKeys, selectedKeys, confirm }) => (
         <div style={ { padding: 8 } }>
             <Row
           type="flex"
@@ -142,8 +142,7 @@ class MainTable extends React.Component {
             </Row>
             <Row>
                 <Slider
-            range
-            value={ [ this.state[ `${ dataIndex }Lo` ], this.state[ `${ dataIndex }Hi` ] ] }
+            range value={ [ this.state[ `${ dataIndex }Lo` ], this.state[ `${ dataIndex }Hi` ] ] }
             onChange={ e =>
               this.setState({
                 [ `${ dataIndex }Lo` ]: e[ 0 ],
