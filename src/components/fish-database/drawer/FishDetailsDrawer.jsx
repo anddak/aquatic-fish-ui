@@ -3,7 +3,7 @@ import {  Drawer, Row, Divider } from "antd";
 import './FishDetailsDrawer.css';
 import { connect } from "react-redux";
 import { Typography } from 'antd';
-import { changeDrawerVisibility } from "../../js/redux/actions/index";
+import { changeDrawerVisibility } from "../../../js/redux/actions/index";
 import {DrawerSectionClassification} from "./drawer-section/DrawerSectionClassification";
 import {DrawerSectionDescription} from "./drawer-section/DrawerSectionDescription";
 import DrawerSelectionHabitat from "./drawer-section/DrawerSelectionHabitat";

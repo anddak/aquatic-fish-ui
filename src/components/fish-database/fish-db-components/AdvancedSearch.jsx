@@ -114,7 +114,7 @@ class AdvancedSearch extends React.Component {
                 )}
               </Form.Item>
             </Col>
-            <Col push={1} style={{marginTop: 25}}>
+            <Col offset={5} style={{marginTop: 25}}>
               <Button type="primary" htmlType="submit">
                 Search
               </Button>

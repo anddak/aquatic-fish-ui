@@ -1,7 +1,7 @@
 import {Col, Row} from "antd";
 import {DescriptionItem} from "./DescriptionItem";
 import './DrawerSection.css';
-import {fishImages} from "../../../js/utils/image-mapper";
+import {fishImages} from "../../../../js/utils/image-mapper";
 
 import React from "react";
 

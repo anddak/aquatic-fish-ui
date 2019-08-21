@@ -1,7 +1,7 @@
 import {Col, Row} from "antd";
 import React from "react";
 import './DrawerSection.css';
-import {habitatMaps} from "../../../js/utils/image-mapper";
+import {habitatMaps} from "../../../../js/utils/image-mapper";
 import { Typography } from 'antd';
 
 const { Paragraph } = Typography;
