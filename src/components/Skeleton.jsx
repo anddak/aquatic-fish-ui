@@ -1,9 +1,12 @@
 import React from 'react';
-import MainTable from "./MainTable";
-import {WrappedAdvancedSearch} from "./advanced-search/AdvancedSearch"
 import { Layout, Menu, Icon } from 'antd';
 import Text from "antd/lib/typography/Text";
 import "./Skeleton.css"
+import {Route, Link } from "react-router-dom";
+import {FishDatabase} from "./fish-database/FishDatabase";
+import {MyAquarium} from "./my-aquarium/MyAquarium";
+import {Help} from "./help/Help";
+
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -31,16 +34,19 @@ class Skeleton extends React.Component {
             <div className="logo" />
             <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
               <Menu.Item key="1">
-                <Icon type="user" />
-                <span>nav 1</span>
+                <Icon type="database" />
+                <span>Fish Database</span>
+                <Link to="/fish-database"/>
               </Menu.Item>
               <Menu.Item key="2">
-                <Icon type="video-camera" />
-                <span>nav 2</span>
+                <Icon type="container" />
+                <span>My Aquarium</span>
+                <Link to="/my-aquarium"/>
               </Menu.Item>
               <Menu.Item key="3">
-                <Icon type="upload" />
-                <span>nav 3</span>
+                <Icon type="info-circle" />
+                <span>Help</span>
+                <Link to="/how-to-use"/>
               </Menu.Item>
             </Menu>
           </Sider>
@@ -59,8 +65,10 @@ class Skeleton extends React.Component {
                   minHeight: "100vh",
                 }}
             >
-             <WrappedAdvancedSearch/>
-             <MainTable/>
+             <Route exact path="/" component={FishDatabase} />
+             <Route path="/fish-database" component={FishDatabase} />
+             <Route path="/my-aquarium" component={MyAquarium} />
+             <Route path="/how-to-use" component={Help} />
             </Content>
             <Footer className="footer">
               <Text>Created by Andras Dako, 2019</Text>

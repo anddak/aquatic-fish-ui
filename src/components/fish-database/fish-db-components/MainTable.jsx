@@ -11,8 +11,8 @@ import {
 } from 'antd';
 import './MainTable.css';
 import { connect } from 'react-redux';
-import FishDetailsDrawer from './drawer/FishDetailsDrawer';
-import { changeDrawerVisibility } from '../js/redux/actions';
+import FishDetailsDrawer from '../drawer/FishDetailsDrawer';
+import { changeDrawerVisibility } from '../../../js/redux/actions';
 
 const fishStub = [
   {
